@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Het Croissantje</title>
+
+    <style>
+        :root {
+            --blauw: #075985;
+            --donkerblauw: #064e6a;
+            --lichtblauw: #dbeafe;
+            --groen: #15803d;
+            --donkergroen: #166534;
+            --lichtgroen: #dcfce7;
+            --achtergrond: #f6fbfa;
+            --tekst: #24333b;
+            --grijs: #607078;
+            --wit: #ffffff;
+            --rand: #d3e8e3;
+            --rood: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--achtergrond);
+            color: var(--tekst);
+            line-height: 1.6;
+        }
+
+        body.mandje-open {
+            overflow: hidden;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* Navigatie */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--rand);
+        }
+
+        .navigatie {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            color: var(--blauw);
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--groen);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        nav a {
+            color: var(--donkerblauw);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: var(--groen);
+        }
+
+        .mandje-knop {
+            padding: 11px 16px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--groen);
+            color: var(--wit);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .mandje-knop:hover {
+            background-color: var(--donkergroen);
+        }
+
+        .mandje-aantal {
+            display: inline-flex;
+            min-width: 24px;
+            height: 24px;
+            margin-left: 5px;
+            padding: 0 6px;
+            border-radius: 20px;
+            background-color: var(--wit);
+            color: var(--groen);
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        /* Hero */
+
+        .hero {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 90px 24px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .label {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background-color: var(--lichtgroen);
+            color: var(--donkergroen);
+            font-weight: 800;
+        }
+
+        h1 {
+            margin-bottom: 22px;
+            color: var(--blauw);
+            font-size: 58px;
+            line-height: 1.05;
+        }
+
+        h1 span {
+            color: var(--groen);
+        }
+
+        .hero-tekst {
+            max-width: 560px;
+            margin-bottom: 28px;
+            color: var(--grijs);
+            font-size: 19px;
+        }
+
+        .algemene-knop {
+            display: inline-block;
+            margin: 0 8px 8px 0;
+            padding: 14px 22px;
+            border-radius: 12px;
+            background-color: var(--blauw);
+            color: var(--wit);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .algemene-knop:hover {
+            background-color: #0369a1;
+        }
+
+        .algemene-knop.groen {
+            background-color: var(--groen);
+        }
+
+        .algemene-knop.groen:hover {
+            background-color: var(--donkergroen);
+        }
+
+        .hero-kaart {
+            min-height: 370px;
+            padding: 35px;
+            border-radius: 34px;
+            background: linear-gradient(
+                135deg,
+                var(--lichtblauw),
+                var(--lichtgroen)
+            );
+            box-shadow: 0 20px 45px rgba(7, 89, 133, 0.13);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .croissant-afbeelding {
+            font-size: 120px;
+        }
+
+        .hero-kaart h2 {
+            color: var(--blauw);
+            font-size: 28px;
+        }
+
+        .hero-kaart p {
+            color: var(--donkergroen);
+            font-weight: 800;
+        }
+
+        /* Assortiment */
+
+        .assortiment {
+            padding: 85px 24px;
+            background-color: var(--wit);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .sectie-label {
+            color: var(--groen);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .sectie-titel {
+            margin: 8px 0 38px;
+            color: var(--blauw);
+            font-size: 42px;
+        }
+
+        .producten {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            padding: 28px;
+            border: 1px solid var(--rand);
+            border-radius: 24px;
+            background-color: #f4faf9;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(7, 89, 133, 0.1);
+        }
+
+        .product-icoon {
+            font-size: 54px;
+        }
+
+        .product h3 {
+            margin: 12px 0 7px;
+            color: var(--blauw);
+            font-size: 24px;
+        }
+
+        .product p {
+            color: var(--grijs);
+            flex-grow: 1;
+        }
+
+        .prijs {
+            display: block;
+            margin: 16px 0;
+            color: var(--groen);
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .toevoegen-knop {
+            width: 100%;
+            padding: 13px 15px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--blauw);
+            color: var(--wit);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .toevoegen-knop:hover {
+            background-color: #0369a1;
+        }
+
+        .toevoegen-knop.toegevoegd {
+            background-color: var(--groen);
+        }
+
+        /* Over ons */
+
+        .over-ons {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 85px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 65px;
+            align-items: center;
+        }
+
+        .over-ons p {
+            color: var(--grijs);
+            font-size: 18px;
+        }
+
+        /* Contact */
+
+        .contact {
+            padding: 70px 24px;
+            background-color: var(--donkerblauw);
+            color: var(--wit);
+        }
+
+        .contact-inhoud {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 65px;
+        }
+
+        .contact h2 {
+            margin-bottom: 15px;
+            font-size: 30px;
+        }
+
+        .contact p {
+            color: #d7edf2;
+        }
+
+        .openingstijden {
+            padding: 19px;
+            border-left: 4px solid #4ade80;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .zondag {
+            color: #86efac !important;
+            font-weight: 800;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 24px;
+            background-color: #043348;
+            color: #b6d2db;
+            text-align: center;
+        }
+
+        footer strong {
+            color: #86efac;
+        }
+
+        /* Overlay */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            visibility: hidden;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.45);
+            transition: opacity 0.25s, visibility 0.25s;
+        }
+
+        .overlay.zichtbaar {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Winkelmandje */
+
+        .winkelmandje {
+            position: fixed;
+            top: 0;
+            right: -460px;
+            z-index: 100;
+            width: min(440px, 100%);
+            height: 100vh;
+            padding: 25px;
+            overflow-y: auto;
+            background-color: var(--wit);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.18);
+            transition: right 0.25s;
+        }
+
+        .winkelmandje.zichtbaar {
+            right: 0;
+        }
+
+        .mandje-kop {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--rand);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mandje-kop h2 {
+            color: var(--blauw);
+        }
+
+        .sluiten-knop {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background-color: #eef5f4;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .leeg-mandje {
+            padding: 35px 0;
+            color: var(--grijs);
+            text-align: center;
+        }
+
+        .leeg-icoon {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 46px;
+        }
+
+        .mandje-product {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--rand);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+        }
+
+        .mandje-product h3 {
+            color: var(--blauw);
+            font-size: 17px;
+        }
+
+        .stukprijs {
+            color: var(--grijs);
+            font-size: 13px;
+        }
+
+        .aantal-regelaars {
+            margin-top: 9px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .aantal-regelaars button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--rand);
+            border-radius: 7px;
+            background-color: var(--wit);
+            color: var(--blauw);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .aantal-regelaars button:hover {
+            background-color: var(--lichtblauw);
+        }
+
+        .product-aantal {
+            min-width: 22px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .verwijderen-knop {
+            margin-top: 8px;
+            border: none;
+            background: none;
+            color: var(--rood);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .product-totaal {
+            color: var(--groen);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .mandje-totaal {
+            padding: 22px 0;
+            color: var(--blauw);
+            font-size: 21px;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bestellen-knop {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--groen);
+            color: var(--wit);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .bestellen-knop:hover {
+            background-color: var(--donkergroen);
+        }
+
+        .bestellen-knop:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .bestelbevestiging {
+            display: none;
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: var(--lichtgroen);
+            color: var(--donkergroen);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        @media (max-width: 760px) {
+            nav a {
+                display: none;
+            }
+
+            .hero,
+            .producten,
+            .over-ons,
+            .contact-inhoud {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 55px;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .sectie-titel {
+                font-size: 34px;
+            }
+
+            .hero-kaart {
+                min-height: 290px;
+            }
+
+            .navigatie {
+                padding: 13px 16px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navigatie">
+
+            <a class="logo" href="#home">
+                Het <span>Croissantje</span>
+            </a>
+
+            <nav>
+                <a href="#assortiment">Assortiment</a>
+                <a href="#over-ons">Over ons</a>
+                <a href="#contact">Contact</a>
+
+                <button
+                    class="mandje-knop"
+                    id="openMandjeKnop"
+                    type="button"
+                >
+                    🛒 Mandje
+
+                    <span
+                        class="mandje-aantal"
+                        id="aantalInMandje"
+                    >
+                        0
+                    </span>
+                </button>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div>
+                <div class="label">
+                    Elke dag vers uit de oven
+                </div>
+
+                <h1>
+                    Welkom bij<br>
+                    <span>Het Croissantje</span>
+                </h1>
+
+                <p class="hero-tekst">
+                    Ambachtelijk brood, verse croissants en
+                    huisgemaakt gebak. Iedere dag met aandacht
+                    gebakken voor onze buurt.
+                </p>
+
+                <a class="algemene-knop" href="#assortiment">
+                    Bekijk assortiment
+                </a>
+
+                <a class="algemene-knop groen" href="#contact">
+                    Openingstijden
+                </a>
+            </div>
+
+
+            <div class="hero-kaart">
+                <div class="croissant-afbeelding">
+                    🥐
+                </div>
+
+                <h2>Begin je dag goed.</h2>
+
+                <p>Met een vers croissantje.</p>
+            </div>
+
+        </section>
+
+
+        <section class="assortiment" id="assortiment">
+
+            <div class="container">
+
+                <div class="sectie-label">
+                    Uit onze bakkerij
+                </div>
+
+                <h2 class="sectie-titel">
+                    Onze favorieten
+                </h2>
+
+
+                <div class="producten">
+
+                    <article class="product">
+                        <div class="product-icoon">🥐</div>
+
+                        <h3>Croissant</h3>
+
+                        <p>
+                            Knapperig, luchtig en gemaakt met
+                            roomboter. Iedere ochtend vers uit
+                            de oven.
+                        </p>
+
+                        <span class="prijs">€ 2,10</span>
+
+                        <button
+                            class="toevoegen-knop"
+                            type="button"
+                            data-product-id="croissant"
+                            data-product-naam="Croissant"
+                            data-product-prijs="2.10"
+                        >
+                            🛒 In mandje
+                        </button>
+                    </article>
+
+
+                    <article class="product">
+                        <div class="product-icoon">🥖</div>
+
+                        <h3>Desembrood</h3>
+
+                        <p>
+                            Een stevige korst en luchtige
+                            binnenkant. Langzaam gerezen voor
+                            extra smaak.
+                        </p>
+
+                        <span class="prijs">€ 4,25</span>
+
+                        <button
+                            class="toevoegen-knop"
+                            type="button"
+                            data-product-id="desembrood"
+                            data-product-naam="Desembrood"
+                            data-product-prijs="4.25"
+                        >
+                            🛒 In mandje
+                        </button>
+                    </article>
+
+
+                    <article class="product">
+                        <div class="product-icoon">🍎</div>
+
+                        <h3>Appeltaart</h3>
+
+                        <p>
+                            Huisgemaakte appeltaart met appel,
+                            kaneel en een rijk gevulde korst.
+                        </p>
+
+                        <span class="prijs">€ 3,75</span>
+
+                        <button
+                            class="toevoegen-knop"
+                            type="button"
+                            data-product-id="appeltaart"
+                            data-product-naam="Appeltaart"
+                            data-product-prijs="3.75"
+                        >
+                            🛒 In mandje
+                        </button>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="over-ons" id="over-ons">
+
+            <div>
+                <div class="sectie-label">
+                    Ambacht &amp; aandacht
+                </div>
+
+                <h2 class="sectie-titel">
+                    Jouw buurtbakker
+                </h2>
+            </div>
+
+            <p>
+                Bij Het Croissantje nemen we de tijd voor goed
+                brood en lekker gebak. We bakken in kleine
+                hoeveelheden, zodat er iedere dag verse
+                producten voor je klaarstaan.
+            </p>
+
+        </section>
+
+
+        <section class="contact" id="contact">
+
+            <div class="contact-inhoud">
+
+                <div>
+                    <h2>Kom gezellig langs</h2>
+
+                    <p>
+                        Voorbeeldstraat 12<br>
+                        2511 AB Den Haag
+                    </p>
+
+                    <br>
+
+                    <p>
+                        070 - 123 45 67<br>
+                        hallo@hetcroissantje.nl
+                    </p>
+                </div>
+
+
+                <div>
+                    <h2>Openingstijden</h2>
+
+                    <div class="openingstijden">
+                        <p>
+                            Maandag – vrijdag:
+                            07:00 – 18:00
+                        </p>
+
+                        <p>
+                            Zaterdag:
+                            07:00 – 17:00
+                        </p>
+
+                        <p class="zondag">
+                            Zondag:
+                            08:00 – 16:00
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © 2026
+        <strong>Het Croissantje</strong>
+        · Elke dag vers gebakken
+    </footer>
+
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <aside
+        class="winkelmandje"
+        id="winkelmandje"
+        aria-label="Winkelmandje"
+    >
+
+        <div class="mandje-kop">
+            <h2>Jouw mandje</h2>
+
+            <button
+                class="sluiten-knop"
+                id="sluitMandjeKnop"
+                type="button"
+                aria-label="Winkelmandje sluiten"
+            >
+                ×
+            </button>
+        </div>
+
+
+        <div id="mandjeProducten"></div>
+
+
+        <div class="mandje-totaal">
+            <span>Totaal</span>
+            <span id="mandjeTotaal">€ 0,00</span>
+        </div>
+
+
+        <button
+            class="bestellen-knop"
+            id="bestellenKnop"
+            type="button"
+            disabled
+        >
+            Bestelling plaatsen
+        </button>
+
+
+        <div
+            class="bestelbevestiging"
+            id="bestelbevestiging"
+        >
+            Bedankt! Je voorbeeldbestelling is geplaatst.
+        </div>
+
+    </aside>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /*
+             * Winkelmandje laden.
+             */
+
+            let winkelmandje = {};
+
+            try {
+                const opgeslagenMandje =
+                    localStorage.getItem("hetCroissantjeMandje");
+
+                if (opgeslagenMandje) {
+                    winkelmandje =
+                        JSON.parse(opgeslagenMandje);
+                }
+            } catch (fout) {
+                winkelmandje = {};
+            }
+
+
+            /*
+             * Elementen ophalen.
+             */
+
+            const winkelmandjeElement =
+                document.getElementById("winkelmandje");
+
+            const overlay =
+                document.getElementById("overlay");
+
+            const openMandjeKnop =
+                document.getElementById("openMandjeKnop");
+
+            const sluitMandjeKnop =
+                document.getElementById("sluitMandjeKnop");
+
+            const mandjeProducten =
+                document.getElementById("mandjeProducten");
+
+            const aantalInMandje =
+                document.getElementById("aantalInMandje");
+
+            const mandjeTotaal =
+                document.getElementById("mandjeTotaal");
+
+            const bestellenKnop =
+                document.getElementById("bestellenKnop");
+
+            const bestelbevestiginguerySelectorAll(".toevoegen-knop");
+
+
+            /*
+             * Hulpfuncties.
+             */
+
+            function maakEuroBedrag(bedrag) {
+                return new Intl.NumberFormat(
+                    "nl-NL",
+                    {
+                        style: "currency",
+                        currency: "EUR"
+                    }
+                ).format(bedrag);
+            }
+
+
+            function bewaarMandje() {
+                try {
+                    localStorage.setItem(
+                        "hetCroissantjeMandje",
+                        JSON.stringify(winkelmandje)
+                    );
+                } catch (fout) {
+                    console.log(
+                        "Het winkelmandje kon niet worden opgeslagen."
+                    );
+                }
+            }
+
+
+            function openMandje() {
+                winkelmandjeElement.classList.add("zichtbaar");
+                overlay.classList.add("zichtbaar");
+                document.body.classList.add("mandje-open");
+            }
+
+
+            function sluitMandje() {
+                winkelmandjeElement.classList.remove("zichtbaar");
+                overlay.classList.remove("zichtbaar");
+                document.body.classList.remove("mandje-open");
+            }
+
+
+            function voegProductToe(
+                productId,
+                productNaam,
+                productPrijs,
+                knop
+            ) {
+                if (winkelmandje[productId]) {
+                    winkelmandje[productId].aantal += 1;
+                } else {
+                    winkelmandje[productId] = {
+                        naam: productNaam,
+                        prijs: productPrijs,
+                        aantal: 1
+                    };
+                }
+
+                bewaarMandje();
+                tekenMandje();
+
+                knop.textContent = "✓ Toegevoegd";
+                knop.classList.add("toegevoegd");
+
+                setTimeout(function () {
+                    knop.textContent = "🛒 In mandje";
+                    knop.classList.remove("toegevoegd");
+                }, 800);
+
+                openMandje();
+            }
+
+
+            function veranderAantal(productId, verandering) {
+                if (!winkelmandje[productId]) {
+                    return;
+                }
+
+                winkelmandje[productId].aantal += verandering;
+
+                if (winkelmandje[productId].aantal <= 0) {
+                    delete winkelmandje[productId];
+                }
+
+                bewaarMandje();
+                tekenMandje();
+            }
+
+
+            function verwijderProduct(productId) {
+                delete winkelmandje[productId];
+
+                bewaarMandje();
+                tekenMandje();
+            }
+
+
+            /*
+             * Inhoud van het mandje tekenen.
+             */
+
+            function tekenMandje() {
+                const productIds =
+                    Object.keys(winkelmandje);
+
+                let totaalAantal = 0;
+                let totaalBedrag = 0;
+
+                mandjeProducten.innerHTML = "";
+
+                if (productIds.length === 0) {
+                    mandjeProducten.innerHTML = `
+                        <div class="leeg-mandje">
+                            <span class="leeg-icoon">🛒</span>
+                            Je mandje is nog leeg.
+                        </div>
+                    `;
+                }
+
+
+                productIds.forEach(function (productId) {
+                    const product =
+                        winkelmandje[productId];
+
+                    const productTotaal =
+                        product.prijs * product.aantal;
+
+                    totaalAantal += product.aantal;
+                    totaalBedrag += productTotaal;
+
+
+                    const productRegel =
+                        document.createElement("div");
+
+                    productRegel.className =
+                        "mandje-product";
+
+
+                    const productInformatie =
+                        document.createElement("div");
+
+
+                    const productTitel =
+                        document.createElement("h3");
+
+                    productTitel.textContent =
+                        product.naam;
+
+
+                    const stukprijs =
+                        document.createElement("div");
+
+                    stukprijs.className =
+                        "stukprijs";
+
+                    stukprijs.textContent =
+                        maakEuroBedrag(product.prijs) +
+                        " per stuk";
+
+
+                    const aantalRegelaars =
+                        document.createElement("div");
+
+                    aantalRegelaars.className =
+                        "aantal-regelaars";
+
+
+                    const minderKnop =
+                        document.createElement("button");
+
+                    minderKnop.type = "button";
+                    minderKnop.textContent = "−";
+                    minderKnop.setAttribute(
+                        "aria-label",
+                        "Eén minder"
+                    );
+
+                    minderKnop.addEventListener(
+                        "click",
+                        function () {
+                            veranderAantal(productId, -1);
+                        }
+                    );
+
+
+                    const aantalTekst =
+                        document.createElement("span");
+
+                    aantalTekst.className =
+                        "product-aantal";
+
+                    aantalTekst.textContent =
+                        product.aantal;
+
+
+                    const meerKnop =
+                        document.createElement("button");
+
+                    meerKnop.type = "button";
+                    meerKnop.textContent = "+";
+                    meerKnop.setAttribute(
+                        "aria-label",
+                        "Eén meer"
+                    );
+
+                    meerKnop.addEventListener(
+                        "click",
+                        function () {
+                            veranderAantal(productId, 1);
+                        }
+                    );
+
+
+                    const verwijderenKnop =
+                        document.createElement("button");
+
+                    verwijderenKnop.type = "button";
+                    verwijderenKnop.className =
+                        "verwijderen-knop";
+
+                    verwijderenKnop.textContent =
+                        "Verwijderen";
+
+                    verwijderenKnop.addEventListener(
+                        "click",
+                        function () {
+                            verwijderProduct(productId);
+                        }
+                    );
+
+
+                    const totaalPrijs =
+                        document.createElement("div");
+
+                    totaalPrijs.className =
+                        "product-totaal";
+
+                    totaalPrijs.textContent =
+                        maakEuroBedrag(productTotaal);
+
+
+                    aantalRegelaars.appendChild(minderKnop);
+                    aantalRegelaars.appendChild(aantalTekst);
+                    aantalRegelaars.appendChild(meerKnop);
+
+                    productInformatie.appendChild(productTitel);
+                    productInformatie.appendChild(stukprijs);
+                    productInformatie.appendChild(aantalRegelaars);
+                    productInformatie.appendChild(verwijderenKnop);
+
+                    productRegel.appendChild(productInformatie);
+                    productRegel.appendChild(totaalPrijs);
+
+                    mandjeProducten.appendChild(productRegel);
+                });
+
+
+                aantalInMandje.textContent =
+                    totaalAantal;
+
+                mandjeTotaal.textContent =
+                    maakEuroBedrag(totaalBedrag);
+
+                bestellenKnop.disabled =
+                    productIds.length === 0;
+            }
+
+
+            /*
+             * Klikgebeurtenissen voor de productknoppen.
+             */
+
+            toevoegenKnoppen.forEach(function (knop) {
+                knop.addEventListener("click", function () {
+                    const productId =
+                        knop.dataset.productId;
+
+                    const productNaam =
+                        knop.dataset.productNaam;
+
+                    const productPrijs =
+                        Number(knop.dataset.productPrijs);
+
+                    voegProductToe(
+                        productId,
+                        productNaam,
+                        productPrijs,
+                        knop
+                    );
+                });
+            });
+
+
+            /*
+             * Winkelmandje openen en sluiten.
+             */
+
+            openMandjeKnop.addEventListener(
+                "click",
+                openMandje
+            );
+
+            sluitMandjeKnop.addEventListener(
+                "click",
+                sluitMandje
+            );
+
+            overlay.addEventListener(
+                "click",
+                sluitMandje
+            );
+
+            document.addEventListener(
+                "keydown",
+                function (gebeurtenis) {
+                    if (gebeurtenis.key === "Escape") {
+                        sluitMandje();
+                    }
+                }
+            );
+
+
+            /*
+             * Voorbeeldbestelling plaatsen.
+             */
+
+            bestellenKnop.addEventListener(
+                "click",
+                function () {
+                    if (
+                        Object.keys(winkelmandje).length === 0
+                    ) {
+                        return;
+                    }
+
+                    winkelmandje = {};
+
+                    bewaarMandje();
+                    tekenMandje();
+
+                    bestelbevestiging.style.display =
+                        "block";
+
+                    setTimeout(function () {
+                        bestelbevestiging.style.display =
+                            "none";
+                    }, 4000);
+                }
+            );
+
+
+            /*
+             * Eerste weergave van het mandje.
+             */
+
+            tekenMandje();
+        });
+    </script>
+
+</body>
+</html>
